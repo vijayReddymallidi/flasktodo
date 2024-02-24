@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; /* Set your desired background color */
+            background-size: cover;
+            text-align: center; /* Center the content horizontally */
+        }
+        
+        
+        h1 {
+            text-align: center; /* Center the text horizontally */
+            margin-top: 20px;   /* Add top margin to create space */
+            color: red;         /* Set the font color to red */
+        }
+        
+        .container {
+            width: 800px;
+            margin: 0 auto; /* Center the container horizontally */
+            justify-content: space-between;
+        }
+        .input-block, .output-block {
+            width: 50%; /* Set width to half of the container */
+            background-color: rgba(255, 0, 0, 0.5); /* Transparent red background color */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box; /* Include padding and border in the width calculation */
+            float: left; /* Align blocks horizontally */
+        }
+        
+        
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        li p {
+            margin: 0;
+            color: #666;
+        }
+        a {
+            color: #ff5050;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>TODO LIST</h1>
+    <div class="container">
+        <div class="input-block">
+            <h2>Add New Task</h2>
+            <form action="/add" method="POST">
+                <label for="task">Task:</label>
+                <input type="text" id="task" name="task" placeholder="Add new task...">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" placeholder="Enter task description..."></textarea>
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+        <div class="output-block">
+            <h2>Tasks</h2>
+            <ul>
+                {% for task in tasks %}
+                <li>
+                    <div>
+                        <strong>{{ task[1] }}</strong>                
+                        <p>{{ task[2] }}</p>
+                    </div>
+                    <div>
+                        <a href="/edit/{{ task[0] }}">Edit</a>
+                        <a href="/delete/{{ task[0] }}">Delete</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
